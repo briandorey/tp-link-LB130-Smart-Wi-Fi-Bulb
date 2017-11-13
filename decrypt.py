@@ -54,7 +54,7 @@ def main():
                   0xab]
 
     output = decrypt(teststring, encryption_key)
-    print output
+    print(output)
 
 
 if __name__ == "__main__":

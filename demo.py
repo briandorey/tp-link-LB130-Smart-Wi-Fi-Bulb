@@ -18,9 +18,9 @@ def main():
     light = LB130("10.0.0.130")
 
     # fetch the details for the light
-    print "Device ID: " + light.device_id
-    print "Alias: " + light.alias
-    print "Wattage: " + str(light.wattage)
+    print("Device ID: " + light.device_id)
+    print("Alias: " + light.alias)
+    print("Wattage: " + str(light.wattage))
 
     # set the transition period for any changes to 1 seconds
     light.transition_period = 0

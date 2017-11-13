@@ -342,14 +342,14 @@ class LB130(object):
             valuelist[i] = chr(var ^ int(key))
             key = ord(valuelist[i])
 
-        return "".join(valuelist)
+        return bytearray("".join(valuelist).encode("latin_1"))
 
     @staticmethod
     def __decrypt(value, key):
         '''
         Decrypt the command string
         '''
-        valuelist = list(value)
+        valuelist = list(value.decode("latin_1"))
 
         for i in range(len(valuelist)):
             var = ord(valuelist[i])
@@ -363,7 +363,7 @@ class LB130(object):
         Update the bulbs status
         '''
         enc_message = self.__encrypt(message, self.encryption_key)
-
+        
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             sock.settimeout(5)
