@@ -7,6 +7,7 @@ Control class for TP-Link A19-LB130 RBGW WiFi bulb
 import datetime
 import socket
 import json
+import sys
 
 
 class LB130(object):
@@ -341,8 +342,10 @@ class LB130(object):
             var = ord(valuelist[i])
             valuelist[i] = chr(var ^ int(key))
             key = ord(valuelist[i])
-
-        return bytearray("".join(valuelist).encode("latin_1"))
+        if sys.version_info >= (3,0):
+            return bytearray("".join(valuelist).encode("latin_1")) # python 3 fix
+        else:
+            return "".join(valuelist)
 
     @staticmethod
     def __decrypt(value, key):
