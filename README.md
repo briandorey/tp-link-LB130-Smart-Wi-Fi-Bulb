@@ -85,7 +85,13 @@ brightness(brightness)
 Get or set the brightness.  Value between 0 and 100.
 
 ```
+hsb((hue, saturation, brightness))
+```
+
+Get or set the bulbs hue, saturation, and brightness.
+
+```
 temperature(temperature)
 ```
 
-Get or set the colour temperature.  Value between 0 and 7000.
+Get or set the colour temperature.  Value between 2500 and 9000.
