@@ -319,7 +319,7 @@ class LB130(object):
         '''
         Set the bulb color temperature
         '''
-        if temperature >= 0 and temperature <= 7000:
+        if temperature >= 2500 and temperature <= 9000:
             self.__color_temp = temperature
             self.__update("{\"smartlife.iot.smartbulb.lightingservice\":\
                           {\"transition_light_state\":{\"ignore_default\":\
@@ -327,7 +327,40 @@ class LB130(object):
                           str(self.__transition_period) + ",\"color_temp\":" +
                           str(self.__color_temp) + "}}}")
         else:
-            raise ValueError('temperature out of range: 0 to 7000')
+            raise ValueError('temperature out of range: 2500 to 9000')
+
+    @property
+    def hsb(self):
+        '''
+        Get the bulb hue, saturation, and brightness
+        '''
+        return (self.__hue, self.__saturation, self.__brightness)
+
+    @hsb.setter
+    def hsb(self, hsb):
+        '''
+        Set the bulb hue, saturation, and brightness
+        '''
+        try:
+            hue, saturation, brightness = hsb
+        except ValueError:
+            raise ValueError("Pass an iterable with hue, saturation, and brightness")
+
+        if hue >= 0 and hue <= 360 and saturation >= 0 and saturation <= 100 and brightness >= 0 and brightness <= 100:
+            self.__hue = hue
+            self.__saturation = saturation
+            self.__brightness = brightness
+            self.__update("{\"smartlife.iot.smartbulb.lightingservice\":\
+                          {\"transition_light_state\":{\"ignore_default\":\
+                          1,\"transition_period\":" +
+                          str(self.__transition_period) +
+                          ",\"hue\":" + str(self.__hue) +
+                          ",\"saturation\":" + str(self.__saturation) +
+                          ",\"brightness\":" + str(self.__brightness) +
+                          ",\"color_temp\":0}}}")
+        else:
+            raise ValueError('hue, saturation, or brightness out of range')
+
 
     # private methods
 
