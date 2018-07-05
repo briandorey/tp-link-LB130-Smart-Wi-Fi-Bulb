@@ -319,7 +319,7 @@ class LB130(object):
         '''
         Set the bulb color temperature
         '''
-        if temperature >= 0 and temperature <= 7000:
+        if temperature >= 2500 and temperature <= 9000:
             self.__color_temp = temperature
             self.__update("{\"smartlife.iot.smartbulb.lightingservice\":\
                           {\"transition_light_state\":{\"ignore_default\":\
@@ -327,7 +327,7 @@ class LB130(object):
                           str(self.__transition_period) + ",\"color_temp\":" +
                           str(self.__color_temp) + "}}}")
         else:
-            raise ValueError('temperature out of range: 0 to 7000')
+            raise ValueError('temperature out of range: 2500 to 9000')
 
     # private methods
 
