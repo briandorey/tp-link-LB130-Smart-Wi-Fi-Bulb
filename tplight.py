@@ -413,7 +413,7 @@ class LB130(object):
             data_received = False
             dec_data = ""
             while True:
-                data, addr = sock.recvfrom(2048)  # buffer size is 1024 bytes
+                data, addr = sock.recvfrom(2048)  # buffer size is 2048 bytes
                 dec_data += self.__decrypt(data, self.encryption_key)
                 if "}}}" in dec_data:  # end of sysinfo message
                     data_received = True
@@ -442,7 +442,7 @@ class LB130(object):
             data_received = False
             dec_data = ""
             while True:
-                data, addr = sock.recvfrom(2048)  # buffer size is 2048 bytes2
+                data, addr = sock.recvfrom(2048)  # buffer size is 2048 bytes
                 dec_data += self.__decrypt(data, self.encryption_key)
                 if "}}}" in dec_data:  # end of sysinfo message
                     data_received = True
