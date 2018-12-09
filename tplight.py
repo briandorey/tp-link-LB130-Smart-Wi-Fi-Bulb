@@ -68,12 +68,17 @@ class LB130(object):
                 col1 = 'system'
                 col2 = 'get_sysinfo'
                 col3 = 'light_state'
+                col4 = 'dft_on_state'
                 self.__alias = data[col1][col2]['alias']
                 self.__on_off = int(data[col1][col2][col3]['on_off'])
-                self.__hue = int(data[col1][col2][col3]['hue'])
-                self.__saturation = int(data[col1][col2][col3]['saturation'])
-                self.__brightness = int(data[col1][col2][col3]['brightness'])
-                self.__color_temp = int(data[col1][col2][col3]['color_temp'])
+                if self.__on_off:
+                    state_dict = data[col1][col2][col3]
+                else:
+                    state_dict = data[col1][col2][col3][col4]
+                self.__hue = int(state_dict['hue'])
+                self.__saturation = int(state_dict['saturation'])
+                self.__brightness = int(state_dict['brightness'])
+                self.__color_temp = int(state_dict['color_temp'])
                 self.device_id = str(data[col1][col2]['deviceId'])
             except (RuntimeError, TypeError, ValueError) as exception:
                 raise Exception(exception)
@@ -408,8 +413,8 @@ class LB130(object):
             data_received = False
             dec_data = ""
             while True:
-                data, addr = sock.recvfrom(1024)  # buffer size is 1024 bytes
-                dec_data = self.__decrypt(data, self.encryption_key)
+                data, addr = sock.recvfrom(2048)  # buffer size is 2048 bytes
+                dec_data += self.__decrypt(data, self.encryption_key)
                 if "}}}" in dec_data:  # end of sysinfo message
                     data_received = True
                     break
@@ -437,8 +442,8 @@ class LB130(object):
             data_received = False
             dec_data = ""
             while True:
-                data, addr = sock.recvfrom(1024)  # buffer size is 1024 bytes
-                dec_data = self.__decrypt(data, self.encryption_key)
+                data, addr = sock.recvfrom(2048)  # buffer size is 2048 bytes
+                dec_data += self.__decrypt(data, self.encryption_key)
                 if "}}}" in dec_data:  # end of sysinfo message
                     data_received = True
                     break
