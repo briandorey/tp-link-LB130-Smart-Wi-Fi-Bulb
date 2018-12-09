@@ -120,9 +120,9 @@ class LB130(object):
         Set the bulb to an on state
         '''
         __bulb_on_off = 1
-        self.__update("{\"smartlife.iot.smartbulb.lightingservice\":{\"\
-                      transition_light_state\":{\"ignore_default\":1,\"\
-                      transition_period\":" +
+        self.__update("{\"smartlife.iot.smartbulb.lightingservice\":{\""
+                      "transition_light_state\":{\"ignore_default\":1,\""
+                      "transition_period\":" +
                       str(self.__transition_period) + ",\"on_off\":1}}}")
 
     def off(self):
@@ -130,9 +130,10 @@ class LB130(object):
         Set the bulb to an off state
         '''
         __bulb_on_off = 0
-        self.__update("{\"smartlife.iot.smartbulb.lightingservice\":{\"\
-                      transition_light_state\":{\"ignore_default\":1,\"transition_period\"\
-                      :" + str(self.__transition_period) + ",\"on_off\":0}}}")
+        self.__update("{\"smartlife.iot.smartbulb.lightingservice\":{\""
+                      "transition_light_state\":{\"ignore_default\":1,\"transition_period\""
+                      ":" + str(self.__transition_period) + ",\"on_off\":0}}}")
+
 
     def reboot(self):
         '''
